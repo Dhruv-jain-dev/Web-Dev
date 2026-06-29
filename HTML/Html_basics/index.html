@@ -179,63 +179,436 @@ Description: <dl>
 <dl><dt>HTML</dt><dd>Markup Language</dd></dl>
 </section>
 
-<!--
-11. TABLES
+<table>
+      <caption>
+        Table Title
+      </caption>
+      <thead>
+        <tr>
+          <th>Heading 1</th>
+          <th>Heading 2</th>
+        </tr>
+      </thead>
 
-table
-thead
-tbody
-tfoot
-tr
-th
-td
--->
+      <tbody>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+        </tr>
+      </tbody>
 
-<section>
-<table border="1" cellpadding="6">
-<tr><th>Name</th><th>Age</th></tr>
-<tr><td>Dhruv</td><td>20</td></tr>
-</table>
-</section>
+      <tfoot>
+        <tr>
+          <td colspan="2">Footer Info</td>
+        </tr>
+      </tfoot>
+    </table>
 
-<!--
-12. FORMS
+    <hr color="blue" />
 
-Important tags:
-form
-label
-input
-textarea
-select
-option
-button
+    <!-- Practice 1: Basic table with student data (no rowspan/colspan) -->
+    <table>
+      <caption>
+        Sample Table
+      </caption>
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Age</th>
+          <th>University</th>
+          <th>Skills</th>
+        </tr>
+      </thead>
 
-Common input types:
-text
-email
-password
-number
-date
-checkbox
-radio
-file
-color
-range
-submit
--->
+      <tbody>
+        <tr>
+          <td>Geetansh</td>
+          <td>20</td>
+          <td>University of Newcastle</td>
+          <td>Full Stack AI Development</td>
+        </tr>
+        <tr>
+          <td>Ishaan Kapoor</td>
+          <td>20</td>
+          <td>Lovely Professional University</td>
+          <td>Back End Development</td>
+        </tr>
+        <tr>
+          <td>Dhruv Jain</td>
+          <td>19</td>
+          <td>GNE</td>
+          <td>Data Science</td>
+        </tr>
+        <tr>
+          <td>Aarav Thakur</td>
+          <td>20</td>
+          <td>Western Sydney University</td>
+          <td>Penetration Testing</td>
+        </tr>
+        <tr>
+          <td>Varun Kumar Midha</td>
+          <td>22</td>
+          <td>Punjab University</td>
+          <td>Digital Marketing</td>
+        </tr>
+      </tbody>
+    </table>
 
-<section>
-<form>
-<label>Name:</label>
-<input type="text"><br><br>
-<label>Email:</label>
-<input type="email"><br><br>
-<label>Password:</label>
-<input type="password"><br><br>
-<button>Submit</button>
-</form>
-</section>
+    <hr color="blue" />
 
+    <!--
+    Practice 2: colspan + rowspan demo (Food Menu)
+    Header row 1: "Item" (rowspan=2) | "Price" (colspan=2)
+    Header row 2: "INR" | "AUD"
+    → "Item" spans down 2 rows, so no extra <th> in row 2.
+    → "Price" spans 2 columns, so only 1 <th> in row 1, not 2.
+    -->
+    <table>
+      <caption>
+        Food Menu
+      </caption>
+      <thead>
+        <tr>
+          <th rowspan="2">Item</th>
+          <th colspan="2">Price</th>
+        </tr>
+        <tr>
+          <th>INR</th>
+          <th>AUD</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Frooti</td>
+          <td>10</td>
+          <td>0.14</td>
+        </tr>
+        <tr>
+          <td>Samosa</td>
+          <td>12</td>
+          <td>0.17</td>
+        </tr>
+        <tr>
+          <td>Chips</td>
+          <td>20</td>
+          <td>0.28</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr color="blue" />
+
+    <!--
+    Practice 3: Complex rowspan + colspan demo
+    Header row 1: empty (rowspan=2) | "Average" (colspan=2) | "Red Eyes" (rowspan=2)
+    Header row 2: "Height" | "Weight"  ← only 2 cells here (others consumed by rowspan)
+    Data rows 3–4: normal 4-cell rows.
+    -->
+    <table>
+      <caption>
+        A Test Table with Merged Cells
+      </caption>
+      <thead>
+        <tr>
+          <td rowspan="2"></td>
+          <td colspan="2">Average</td>
+          <td rowspan="2">Red Eyes</td>
+        </tr>
+        <tr>
+          <td>Height</td>
+          <td>Weight</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Males</td>
+          <td>1.9</td>
+          <td>0.003</td>
+          <td>40%</td>
+        </tr>
+        <tr>
+          <td>Females</td>
+          <td>1.7</td>
+          <td>0.002</td>
+          <td>43%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr color="blue" />
+
+    <!--
+    ================================================================
+    HTML FORMS – QUICK REFERENCE
+    ================================================================
+
+    BASIC STRUCTURE:
+    <form action="/url" method="GET/POST">
+      inputs, labels, buttons...
+    </form>
+
+    action  → URL where form data is sent (backend endpoint)
+    method  → GET  : data visible in URL (good for search/learning)
+              POST : data hidden in body (use for passwords/sensitive data)
+    Default → GET, if method is not specified.
+
+    LABEL + INPUT CONNECTION:
+    label "for" must match input "id" → makes the label clickable.
+    input "name" → key sent to the backend (required for submission).
+    input "id"   → frontend only (CSS/JS targeting). Never reaches the backend.
+
+    INPUT TYPES:
+    text     → plain text          email    → validates email format
+    password → hides characters    number   → numbers only
+    checkbox → multiple allowed    radio    → one selection per group
+    range    → slider (min/max/step)         file     → file upload
+
+    CHECKBOX vs RADIO:
+    Checkbox: multiple selections allowed.
+      → Related group options → same name, always give value.
+          Backend receives: sport=cricket&sport=badminton
+      → Independent yes/no → different names, value is optional.
+          Backend receives: age_check=on
+
+    Radio: only one selection allowed per group.
+      → All in same group share the same name. Always give value.
+          Backend receives: gender=male
+
+    SELECT DROPDOWN:
+    → name goes on <select>, value goes on each <option>.
+    → Add the selected attribute for the default option.
+
+    BUTTON TYPES:
+    submit → submits the form  |  reset → clears all fields  |  button → needs JavaScript
+
+    FILE UPLOAD RULE:
+    Always add enctype="multipart/form-data" to the <form> tag when using type="file".
+    Without it → browser sends only the filename string, NOT the actual file.
+
+    ID vs NAME NAMING CONVENTION:
+    id   → camelCase  (e.g. userName)   → used by JavaScript/CSS
+    name → snake_case (e.g. user_name)  → used by the backend (Python, Node.js, etc.)
+    For learning: keeping both the same is perfectly fine.
+    ================================================================
+    -->
+
+    <!-- Form practice: all common input types demonstrated -->
+    <h2>Form – Geetansh Bhandari</h2>
+    <form
+      action="/action"
+      enctype="multipart/form-data"
+      target="_blank"
+      method="post"
+    >
+      <div>
+        <label for="username">Enter your name: </label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter your name here"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="usermail">Enter your email: </label>
+        <input
+          type="email"
+          id="usermail"
+          name="usermail"
+          placeholder="Enter your email here"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="userpassword">Enter your password: </label>
+        <input
+          type="password"
+          id="userpassword"
+          name="userpassword"
+          placeholder="Enter your password here"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="userage">Enter your age: </label>
+        <input
+          type="number"
+          id="userage"
+          name="userage"
+          placeholder="Enter your age here"
+          required
+        />
+      </div>
+
+      <!-- Independent yes/no checkboxes → different names, no value needed -->
+      <div>
+        <input type="checkbox" id="age_check" name="age_check" required />
+        <label for="age_check">Kindly confirm that you are 18+</label>
+      </div>
+
+      <div>
+        <input type="checkbox" id="terms_check" name="terms_check" required />
+        <label for="terms_check"
+          >I have read all of the terms and conditions</label
+        >
+      </div>
+
+      <br />
+
+      <!-- Grouped checkboxes → same name, value required for each option -->
+      <h4>Kindly select your favourite sport(s) from the options below:</h4>
+      <div>
+        <input type="checkbox" id="cricket" name="sport" value="cricket" />
+        <label for="cricket">Cricket</label>
+      </div>
+      <div>
+        <input type="checkbox" id="badminton" name="sport" value="badminton" />
+        <label for="badminton">Badminton</label>
+      </div>
+      <div>
+        <input type="checkbox" id="hockey" name="sport" value="hockey" />
+        <label for="hockey">Hockey</label>
+      </div>
+
+      <br />
+
+      <!-- Radio buttons → same name, value always required -->
+      <h4>Kindly select your gender from the options below:</h4>
+      <div>
+        <input type="radio" id="male" name="gender" value="male" />
+        <label for="male">Male</label>
+      </div>
+      <div>
+        <input type="radio" id="female" name="gender" value="female" />
+        <label for="female">Female</label>
+      </div>
+      <div>
+        <input
+          type="radio"
+          id="transgender"
+          name="gender"
+          value="transgender"
+        />
+        <label for="transgender">Transgender</label>
+      </div>
+
+      <br />
+
+      <!-- Dropdown: name on <select>, value on each <option>, selected = default -->
+      <div>
+        <label for="user_residency">Select Residency Status: </label>
+        <select name="user_residency" id="user_residency">
+          <option value="australian citizen" selected>
+            Australian Citizen
+          </option>
+          <option value="australian pr">Australian PR Holder</option>
+          <option value="international student">International Student</option>
+        </select>
+      </div>
+
+      <br />
+
+      <!-- Range slider: min, max, step control the slider behaviour -->
+      <div>
+        <label for="volume_level">Volume Level</label>
+        <input
+          type="range"
+          id="volume_level"
+          name="volume_level"
+          min="0"
+          max="100"
+          step="10"
+        />
+      </div>
+
+      <br />
+
+      <!-- File upload: enctype="multipart/form-data" on <form> is mandatory -->
+      <div>
+        <label for="user_resume">Kindly upload your resume here: </label>
+        <input type="file" id="user_resume" name="user_resume" />
+      </div>
+
+      <br />
+
+      <div>
+        <label for="user_feedback"
+          >Kindly drop your valuable feedback here:
+        </label>
+        <textarea
+          name="user_feedback"
+          id="user_feedback"
+          placeholder="Write your feedback here"
+          rows="5"
+          cols="30"
+        ></textarea>
+      </div>
+
+      <br />
+      <div>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+      </div>
+    </form>
+
+    <hr color="blue" />
+
+    <!--
+    URL EXPERIMENT – How GET works:
+    website.com/path?name=value&name2=value2
+    ?  → marks the start of form data
+    =  → separates name from value
+    &  → separates multiple pairs
+
+    Every search bar on the internet is just an HTML form underneath.
+    Google:  google.com/search?q=java
+    YouTube: youtube.com/results?search_query=java
+    Frontend = captures the input. Backend = where all the magic happens.
+    -->
+
+    <!-- YouTube, Google, and Reddit search experiments -->
+    <form action="https://www.youtube.com/results" target="_blank">
+      <div>
+        <label for="search_query">YouTube Search Experiment</label>
+        <input
+          type="text"
+          id="search_query"
+          name="search_query"
+          placeholder="Search on YouTube"
+        />
+        <button type="submit">Search</button>
+      </div>
+    </form>
+
+    <form action="https://www.google.com/search" target="_blank">
+      <div>
+        <label for="google_q">Google Search Experiment</label>
+        <input
+          type="text"
+          id="google_q"
+          name="q"
+          placeholder="Search on Google"
+        />
+        <button type="submit">Search</button>
+      </div>
+    </form>
+
+    <form action="https://www.reddit.com/search" target="_blank">
+      <div>
+        <label for="reddit_q">Reddit Search Experiment</label>
+        <input
+          type="text"
+          id="reddit_q"
+          name="q"
+          placeholder="Search on Reddit"
+        />
+        <button type="submit">Search</button>
+      </div>
+    </form>
 <!--
 13. SEMANTIC TAGS
 
